@@ -7,6 +7,10 @@
 export = SendBird;
 export as namespace SendBird;
 
+// Workaround for non-browser environment support.
+interface File {}
+interface ProgressEvent {}
+
 declare const SendBird: SendBirdStatic;
 
 interface SendBirdStatic {
@@ -174,8 +178,8 @@ declare namespace SendBird {
     getSubscribedCustomTypeTotalUnreadMessageCount(): number;
     getSubscribedCustomTypeUnreadMessageCount(customType: string): number;
 
-    getMyGroupChannelChangeLogsByToken(token: string, customTypes: Array<string>, callback:getGroupChannelChangeLogsHandler);
-    getMyGroupChannelChangeLogsByTimestamp(ts: number, customTypes: Array<string>, callback:getGroupChannelChangeLogsHandler);
+    getMyGroupChannelChangeLogsByToken(token: string, customTypes: Array<string>, callback: getGroupChannelChangeLogsHandler): void;
+    getMyGroupChannelChangeLogsByTimestamp(ts: number, customTypes: Array<string>, callback: getGroupChannelChangeLogsHandler): void;
   }
 
   interface Options {
@@ -770,7 +774,7 @@ declare namespace SendBird {
       progressHandler: fileUploadprogressHandler,
       callback: messageCallback
     ): FileMessage; // DEPRECATED
-    
+
     sendFileMessages(fileMessageParamsList: Array<FileMessageParams>, callbackObject: fileMessagesCallbackObject): Array<FileMessage>;
 
     /** UserMessage  */
