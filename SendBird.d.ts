@@ -422,9 +422,9 @@ declare namespace SendBird {
     isIdentical(target: BaseMessageInstance): boolean;
     isOpenChannel(): boolean;
     isGroupChannel(): boolean;
-    isUserMessage(): boolean;
-    isFileMessage(): boolean;
-    isAdminMessage(): boolean;
+    isUserMessage(): this is UserMessage;
+    isFileMessage(): this is FileMessage;
+    isAdminMessage(): this is AdminMessage;
     serialize(): Object;
     getMetaArraysByKeys(keys: Array<string>): Array<MessageMetaArray>;
     applyReactionEvent(event: ReactionEvent): void;
@@ -746,8 +746,8 @@ declare namespace SendBird {
     creator: User;
     createdAt: number;
 
-    isGroupChannel(): boolean;
-    isOpenChannel(): boolean;
+    isGroupChannel(): this is GroupChannel;
+    isOpenChannel(): this is OpenChannel;
     serialize(): Object;
 
     /**
